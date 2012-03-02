@@ -1,0 +1,11 @@
+{
+    "name": "Hacker News Comment Collapser",
+    "version": "0.1",
+    "description": "Collapseable comments for Hacker News",
+    "content_scripts": [
+        {
+            "matches": ["http://news.ycombinator.com/*"],
+            "js": ["js/jquery.js", "js/hne.js"]
+        }
+    ]
+}
