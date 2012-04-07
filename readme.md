@@ -1,7 +1,11 @@
-HN Comment Collapser
-====================
+HN Enhancer
+===========
 
-I wanted collapsible comments for hacker news.  This terrible bit of JavaScript makes that happen.
+This Chrome extensions adds a few features to the Hacker News browsing experience.
+
+* Collapsible comments
+* Show the full domain (including subdomains) for links
+* Open external links in a new window/tab
 
 Installation
 ------------
