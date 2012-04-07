@@ -78,8 +78,10 @@
             var link = $(this).find('a'),
                 comh = $(this).find('span.comhead');
             if(!link.length) return;
-            var disp = link.eq(0).attr('href').replace(/https?:\/\//gi, '');
-            disp = disp.split('/');
+            var disp = link.eq(0)
+                           .attr('href')
+                           .replace(/https?:\/\//gi, '')
+                           .split('/');
             comh.html(' (' + disp[0] + ')');
         });
     }
@@ -108,4 +110,4 @@
     }
     
     $(document).ready(hne.init);
-})(jQuery);
+}(jQuery));
