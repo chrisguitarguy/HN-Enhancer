@@ -6,6 +6,7 @@
     hne.rows = hne.parent.children('tbody').children('tr');
     hne.header = hne.rows.eq(0);
     hne.content = hne.rows.eq(2);
+    hne.items = hne.content.children('td').children('table').eq(0);
     hne.comments = hne.content.children('td').children('table').eq(1);
     
     /*
@@ -68,6 +69,20 @@
         hne.comments.find('span.comhead')
            .append(' | <a href="#" class="hne-collapse">[-]</a>');
     }
+
+    /*
+     * Change the grey URL to include subdomains
+     */
+    hne.showFullDomain = function() {
+        hne.items.find('td.title').each(function() {
+            var link = $(this).find('a'),
+                comh = $(this).find('span.comhead');
+            if(!link.length) return;
+            var disp = link.eq(0).attr('href').replace(/https?:\/\//gi, '');
+            disp = disp.split('/');
+            comh.html(' (' + disp[0] + ')');
+        });
+    }
     
     /*
      * Make it happen
@@ -76,6 +91,7 @@
         $('a[href^=http]').attr('target', '_blank');
         hne.parseComments();
         hne.addCollapser();
+        hne.showFullDomain();
         $('a.hne-collapse').on('click', function(e) {
            var parent = $(this).parents('tr.hne-comment').eq(0);
            if('[-]' == $(this).html()) {
