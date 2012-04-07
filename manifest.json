@@ -1,7 +1,7 @@
 {
-    "name": "Hacker News Comment Collapser",
-    "version": "0.1",
-    "description": "Collapsible comments for Hacker News",
+    "name": "Hacker News Enhancer",
+    "version": "0.2",
+    "description": "Collapsible comments and a few other features for Hacker News",
     "content_scripts": [
         {
             "matches": ["http://news.ycombinator.com/*"],
