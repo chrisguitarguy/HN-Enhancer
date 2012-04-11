@@ -39,6 +39,15 @@
         }
         if(c) $('body').addClass('hne-shortcuts');
     }
+
+    /*
+     * Add a tabindex to all hne-item links
+     */
+    hne.addTabIndex = function() {
+        $('tr.hne-item').each(function(i) {
+            $(this).find('td.title a').attr('tabindex', i+1);
+        });
+    }
     
     /*
      * Get the width of the "offset" image that indents comments"
@@ -115,6 +124,7 @@
         $('a[href^=http]').attr('target', '_blank');
         hne.parseComments();
         hne.parseItems();
+        hne.addTabIndex();
         hne.addCollapser();
         hne.showFullDomain();
         $('a.hne-collapse').on('click', function(e) {
