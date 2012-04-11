@@ -1,4 +1,4 @@
-(function($) {
+(function($, w, d) {
     // Maybe I'll expand this to do other fun stuff?
     var hne = {
         'parent': $('body > center > table')
@@ -8,7 +8,7 @@
     hne.content = hne.rows.eq(2);
     hne.items = hne.content.children('td').children('table').eq(0);
     hne.comments = hne.content.children('td').children('table').eq(1);
-    
+
     /*
      * Add a hne-comment class to all comment rows
      */
@@ -16,6 +16,28 @@
         hne.comments.children('tbody').children('tr').each(function(i) {
            $(this).addClass('hne-comment');
         });
+    }
+
+    hne.parseItems = function () {
+        var t = hne.items.children('tbody').eq(0),
+            c = false;
+        if('/item' == document.location.pathname) {
+            t.children('tr').first().addClass('hne-item');
+            c = true;
+        } else if('/newcomments' == document.location.pathname) {
+            t.children('tr').each(function(i) {
+                if(0 == 1 || (i % 2) == 0)
+                    $(this).addClass('hne-item');
+            });
+            c = true;
+        } else if($.inArray(document.location.pathname, ['/', '/news', '/ask', '/newest']) > -1) {
+            t.children('tr').each(function(i) {
+                if(0 == 1 || (i % 3) == 0)
+                    $(this).addClass('hne-item');
+            });
+            c = true;
+        }
+        if(c) $('body').addClass('hne-shortcuts');
     }
     
     /*
@@ -85,13 +107,14 @@
             comh.html(' (' + disp[0] + ')');
         });
     }
-    
+
     /*
      * Make it happen
      */
     hne.init = function(){
         $('a[href^=http]').attr('target', '_blank');
         hne.parseComments();
+        hne.parseItems();
         hne.addCollapser();
         hne.showFullDomain();
         $('a.hne-collapse').on('click', function(e) {
@@ -109,5 +132,5 @@
         });
     }
     
-    $(document).ready(hne.init);
-}(jQuery));
+    $(d).ready(hne.init);
+}(jQuery, window, document));
